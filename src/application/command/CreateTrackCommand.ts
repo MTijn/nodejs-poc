@@ -1,4 +1,6 @@
-export class CreateTrackCommand {
+import {Command} from "ts-eventsourcing/CommandHandling/Command";
+
+export class CreateTrackCommand implements Command {
     private _identifier: string;
     private _artist: string;
     private _duration: string;
