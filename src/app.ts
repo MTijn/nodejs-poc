@@ -3,9 +3,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Routes} from "./infrastructure/configuration/routes";
 import {Handlers} from "./infrastructure/configuration/handlers";
-import {SimpleCommandBus} from "ts-eventsourcing/CommandHandling/SimpleCommandBus";
 
-const commandBus = new SimpleCommandBus();
 require('dotenv').load();
 
 class App {
@@ -29,7 +27,7 @@ class App {
         this.session.session(this.app);
         this.oidc = this.session.oidc();
         this.routes.routes(this.app, this.oidc);
-        this.handlers.registerHandlers(commandBus);
+        this.handlers.registerHandlers();
     }
 }
 
