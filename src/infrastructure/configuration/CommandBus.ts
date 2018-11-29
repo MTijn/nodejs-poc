@@ -10,3 +10,5 @@ export class CommandBus {
         return this.commandBus;
     }
 }
+
+export const commandBus = new CommandBus();

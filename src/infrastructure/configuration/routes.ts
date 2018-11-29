@@ -1,4 +1,4 @@
-import {TestResource} from "../resource/test.resource";
+import {testResource, TestResource} from "../resource/test.resource";
 
 export class Routes {
     private testResource: TestResource;
@@ -18,7 +18,7 @@ export class Routes {
             }
         });
         app.get("/test", oidc.ensureAuthenticated(), this.testResource.test);
-        app.get("/blaat", oidc.ensureAuthenticated(), this.testResource.createTrack);
+        app.get("/blaat", oidc.ensureAuthenticated(), (req, res) => testResource.createTrack(req, res));
         app.get('/logout', (req, res) => {
             req.logout();
             res.redirect('/');

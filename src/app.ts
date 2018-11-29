@@ -2,7 +2,7 @@ import {Session} from "./infrastructure/configuration/session";
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Routes} from "./infrastructure/configuration/routes";
-import {Handlers} from "./infrastructure/configuration/handlers";
+import {ConfigureHandlers} from "./infrastructure/configuration/handlers";
 
 require('dotenv').load();
 
@@ -11,8 +11,8 @@ class App {
     public app: express.Application;
     public routes: Routes = new Routes();
     public session: Session = new Session();
-    public handlers: Handlers = new Handlers();
     public oidc;
+    public handlers: ConfigureHandlers = new ConfigureHandlers();
 
     constructor() {
         this.app = express();
@@ -27,7 +27,7 @@ class App {
         this.session.session(this.app);
         this.oidc = this.session.oidc();
         this.routes.routes(this.app, this.oidc);
-        this.handlers.registerHandlers();
+        this.handlers.configure();
     }
 }
 

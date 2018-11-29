@@ -5,14 +5,17 @@ import {CreateTrackCommand} from "../../application/command/CreateTrackCommand";
 import {SimpleCommandBus} from "ts-eventsourcing/CommandHandling/SimpleCommandBus";
 import {CreateTrackCommandHandler} from "../../application/commandhandler/CreateTrackCommandHandler";
 import {CommandBus} from "ts-eventsourcing/CommandHandling/CommandBus";
+import {getHandleCommandMetadata} from "ts-eventsourcing/CommandHandling/HandleCommand";
+import {create} from "domain";
+import {commandBus} from "../configuration/CommandBus";
 
 export class TestResource {
     public trackRepository: TrackRepository;
-    private commandBus: CommandBus;
+    public commandBus: CommandBus;
 
     constructor() {
         this.trackRepository = new TestTrackRepository();
-        this.commandBus = new SimpleCommandBus();
+        this.commandBus = commandBus.getCommandBus();
     }
 
     public test (request: Request, response: Response) : Response {
@@ -31,3 +34,5 @@ export class TestResource {
         return resonse.status(201).json();
     }
 }
+
+export const testResource = new TestResource();
