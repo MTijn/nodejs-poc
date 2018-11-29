@@ -8,6 +8,8 @@ import {CommandBus} from "ts-eventsourcing/CommandHandling/CommandBus";
 import {getHandleCommandMetadata} from "ts-eventsourcing/CommandHandling/HandleCommand";
 import {create} from "domain";
 import {commandBus} from "../configuration/CommandBus";
+import {UuidIdentity} from "ts-eventsourcing/ValueObject/UuidIdentity";
+import uuid = require("uuid/v4");
 
 export class TestResource {
     public trackRepository: TrackRepository;
@@ -25,7 +27,7 @@ export class TestResource {
 
     public createTrack(request: Request, resonse: Response) : Response {
         var createTrackCommand = new CreateTrackCommand(
-            '1234',
+            new UuidIdentity(uuid()),
             'Test artist',
             '20',
             'Test title'

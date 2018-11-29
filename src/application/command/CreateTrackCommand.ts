@@ -1,13 +1,14 @@
 import {Command} from "ts-eventsourcing/CommandHandling/Command";
+import {Identity} from "ts-eventsourcing/ValueObject/Identity";
 
 export class CreateTrackCommand implements Command {
-    private _identifier: string;
+    private _identifier: Identity;
     private _artist: string;
     private _duration: string;
     private _title: string;
 
 
-    constructor(identifier: string, artist: string, duration: string, title: string) {
+    constructor(identifier: Identity, artist: string, duration: string, title: string) {
         this._identifier = identifier;
         this._artist = artist;
         this._duration = duration;
@@ -15,7 +16,7 @@ export class CreateTrackCommand implements Command {
     }
 
 
-    get identifier(): string {
+    get identifier(): Identity {
         return this._identifier;
     }
 
